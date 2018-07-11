@@ -46,6 +46,7 @@ def process_url(kml_url):
     try:
         kml_req.raise_for_status()
         xml_memory_file = io.BytesIO(kml_req.content)
+        result = None
         if kml_url.endswith("kmz"):
             if zipfile.is_zipfile(xml_memory_file):
                 zipcontent = zipfile.ZipFile(xml_memory_file)
@@ -106,13 +107,13 @@ for run in root:
 
         if kml_out != None:
             tree_out = ET.ElementTree(kml_out)
-            kml_fn = f"osm-{map_id}-{osm_date}.kml"
-            tree_out.write("unfilt-" + kml_fn, encoding="utf-8")
+            kml_fn = f"osm-ski-area-{map_id}.kml"
+            # tree_out.write("unfilt-" + kml_fn, encoding="utf-8")
             kml_found = kml_out
         else:
             print(f"    No KML for {osm_id}  :-(")
 
-        time.sleep(1)
+        time.sleep(0.5)
 
         # if we found some KML, exit & just use that; don't fetch
         # previous ones - assumes latest is best.
@@ -131,6 +132,13 @@ for run in root:
         #       <name>POI</name>
         #         <description>Points of Interest</description>
         
+        color_tags = kml_found.findall(".//color")
+        for col in color_tags:
+            col_val = col.text
+            if col_val.startswith("#"):
+                col_val = col_val[1:]
+                col.text = col_val
+
         snippets = kml_found.findall(".//Snippet")
         for snip in snippets:
             snip_parent = snip.getparent()
