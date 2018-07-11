@@ -1,6 +1,8 @@
 # Fetch Open Ski Map data
 
-A script to fetch & sanitize open ski map KML
+A script to fetch & sanitize open ski map KML.
+
+Everything here is thanks to the volunteers & hard work at [Skimap.org](https://skimap.org).
 
 ## Pre-reqs
 
@@ -15,6 +17,23 @@ pip install lxml
 pip install BeautifulSoup4
 ```
 
+# Usage
+
 ```bash
 python3 ski-run-browser.py
 ```
+
+Produces files `osm-ski-area-{$ID}.kml`
+
+## Hosting
+
+Main index file is available at [https://s3-ap-southeast-2.amazonaws.com/skimap/ski_areas.kml](https://s3-ap-southeast-2.amazonaws.com/skimap/ski_areas.kml).
+
+This lists all the `ID` numbers of the ski areas.  Once an ID number is selected the filtered, sanitized KML is available at:
+
+https://s3-ap-southeast-2.amazonaws.com/skimap/osm-ski-area-{$ID}.kml
+
+The original unfiltered, but still sanitized KML is available at:
+
+https://s3-ap-southeast-2.amazonaws.com/skimap/unfilt-osm-ski-area-{$ID}.kml
+
