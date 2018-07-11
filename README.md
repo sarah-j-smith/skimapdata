@@ -29,17 +29,21 @@ Produces files `osm-ski-area-{$ID}.kml`
 
 Main index file is available at [https://s3-ap-southeast-2.amazonaws.com/skimap/ski_areas.kml](https://s3-ap-southeast-2.amazonaws.com/skimap/ski_areas.kml).
 
-For example:
-
-https://s3-ap-southeast-2.amazonaws.com/skimap/osm-1-2017-03-27.kml
-
 This lists all the `ID` numbers of the ski areas.  Once an ID number is selected the filtered, sanitized KML is available at:
 
 https://s3-ap-southeast-2.amazonaws.com/skimap/osm-ski-area-{$ID}.kml
 
-The original unfiltered, but still sanitized KML is available at:
+For example:
+
+https://s3-ap-southeast-2.amazonaws.com/skimap/osm-1-2017-03-27.kml
+
+### Unfiltered
+
+The script has the ability to output the unfiltered, but still sanitized KML.  For some fields this is available at:
 
 https://s3-ap-southeast-2.amazonaws.com/skimap/unfilt-osm-ski-area-{$ID}.kml
+
+### Updating S3
 
 If you're me, and have access to write the S3 bucket:
 
